@@ -54,5 +54,30 @@ describe('Thermostat', function() {
     });
   });
 
+  describe('reset', function(){
+    it('resets temperatute to the default of 20', function() {
+      thermostat.reset();
+      expect(thermostat.temperature).toEqual(20);
+    });
+  });
+
+  describe('display engery usage', function() {
+    it('displays low when temperature is less that 18', function() {
+      for(i = 19; i > 16; i--) {
+        thermostat.down();
+      }
+      expect(thermostat.energyUsage()).toEqual("Low");
+    });
+    it('displays medium when temperature is between 18 and 25', function() {
+      expect(thermostat.energyUsage()).toEqual("Medium");
+    });
+    it('displays high when temperature is over 25', function() {
+      for(i = 21; i < 26; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.energyUsage()).toEqual("High");
+    });
+  });
+
 
 });
