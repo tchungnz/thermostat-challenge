@@ -11,8 +11,10 @@
     <button id="down" type="button">Temperature Down</button>
     <button id="reset" type="button">Reset Temperature</button>
     <h2> Power Save Status is: </h2>
+    <h2 id="powersave"></h2>
     <button id="powersaveswitch" type="button">Power Save Switch</button>
     <h2> Energy Usage Status is: </h2>
+    <h2 id="energy_usage"></h2>
 
     <script src="./src/thermostat.js"> </script>
     <script src="./node_modules/jquery/dist/jquery.min.js"> </script>
@@ -26,12 +28,29 @@
     $("#up").on('click', function() {
       thermostat.up();
       $("#temperature").text(thermostat.temperature);
+      $('#energy_usage').text(thermostat.energyUsage());
     });
 
     $("#down").on('click', function() {
       thermostat.down();
       $("#temperature").text(thermostat.temperature);
+      $('#energy_usage').text(thermostat.energyUsage());
     })
+
+    $('#reset').on('click', function(){
+      thermostat.reset()
+      $("#temperature").text(thermostat.temperature);
+      $('#energy_usage').text(thermostat.energyUsage());
+    })
+
+    $('#powersave').text(thermostat.powerSaveStatus());
+
+    $('#powersaveswitch').on('click', function() {
+      thermostat.powerSaveToggle();
+      $('#powersave').text(thermostat.powerSaveStatus());
+    })
+
+    $('#energy_usage').text(thermostat.energyUsage());
 
     });
 
