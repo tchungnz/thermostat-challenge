@@ -26,10 +26,20 @@ describe('Thermostat', function() {
 
   describe('minimum temperature', function() {
     it('has a minimum temperature of 10', function() {
-      for(i = 0; i < 10; i ++) {
+      for(i = 19; i > 9; i --) {
         thermostat.down();
       }
       expect(function() { thermostat.down(); } ).toThrowError("Minimum temperature is 10");
+    });
+  });
+
+  describe('while power saving mode is on', function() {
+    it('has a maximum temperature of 25', function(){
+      //thermostat.powerSave()
+      for(i = 21; i < 26; i++) {
+        thermostat.up();
+      }
+      expect(function() { thermostat.up(); }).toThrowError("POWER SAVING MODE: Maximum temperature is 25");
     });
   });
 
