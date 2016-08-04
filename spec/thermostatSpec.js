@@ -35,12 +35,24 @@ describe('Thermostat', function() {
 
   describe('while power saving mode is on', function() {
     it('has a maximum temperature of 25', function(){
-      //thermostat.powerSave()
       for(i = 21; i < 26; i++) {
         thermostat.up();
       }
-      expect(function() { thermostat.up(); }).toThrowError("POWER SAVING MODE: Maximum temperature is 25");
+      expect(function() { thermostat.up(); }).toThrowError("POWER SAVING MODE ON: Maximum temperature is 25");
     });
   });
+
+  describe('when power saving mode is off', function () {
+    it('the maximum temperature is 32 degrees', function () {
+      thermostat.powerSaveToggle();
+      for(i = 21; i < 33; i++) {
+        thermostat.up();
+      }
+      expect(function() {
+        thermostat.up();
+      }).toThrowError('POWER SAVING MODE OFF: Maximum temperature is 32');
+    });
+  });
+
 
 });
