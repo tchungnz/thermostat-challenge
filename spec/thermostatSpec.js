@@ -24,5 +24,13 @@ describe('Thermostat', function() {
       });
   });
 
+  describe('minimum temperature', function() {
+    it('has a minimum temperature of 10', function() {
+      for(i = 0; i < 10; i ++) {
+        thermostat.down();
+      }
+      expect(function() { thermostat.down(); } ).toThrowError("Minimum temperature is 10");
+    });
+  });
 
 });
