@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1> Current temperature is: </h1>
+    <h1 id='temperature'></h1>
     <button id="up" type="button">Temperature Up</button>
     <button id="down" type="button">Temperature Down</button>
     <button id="reset" type="button">Reset Temperature</button>
@@ -13,7 +14,27 @@
     <button id="powersaveswitch" type="button">Power Save Switch</button>
     <h2> Energy Usage Status is: </h2>
 
-    <script src="/src/thermostat.js"> </script>
+    <script src="./src/thermostat.js"> </script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"> </script>
+    <script>
 
+    $( document ).ready(function() {
+    var thermostat = new Thermostat();
+
+    $("#temperature").text(thermostat.temperature);
+
+    $("#up").on('click', function() {
+      thermostat.up();
+      $("#temperature").text(thermostat.temperature);
+    });
+
+    $("#down").on('click', function() {
+      thermostat.down();
+      $("#temperature").text(thermostat.temperature);
+    })
+
+    });
+
+  </script>
   </body>
 </html>
