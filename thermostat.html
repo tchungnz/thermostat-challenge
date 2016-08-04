@@ -3,18 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title> Thermostat </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <h1> Current temperature is: </h1>
     <h1 id='temperature'></h1>
-    <button id="up" type="button">Temperature Up</button>
-    <button id="down" type="button">Temperature Down</button>
-    <button id="reset" type="button">Reset Temperature</button>
+    <button id="up" class = "tempchange" type="button">Temperature Up</button>
+    <button id="down" class = "tempchange" type="button">Temperature Down</button>
+    <button id="reset" class = "tempchange" type="button">Reset Temperature</button>
     <h2> Power Save Status is: </h2>
     <h2 id="powersave"></h2>
     <button id="powersaveswitch" type="button">Power Save Switch</button>
     <h2> Energy Usage Status is: </h2>
-    <h2 id="energy_usage"></h2>
+    <h2 class="energy_usage" id="energy_usage"></h2>
 
     <script src="./src/thermostat.js"> </script>
     <script src="./node_modules/jquery/dist/jquery.min.js"> </script>
@@ -23,36 +24,44 @@
     $( document ).ready(function() {
     var thermostat = new Thermostat();
 
-    $("#temperature").text(thermostat.temperature);
+    function getTemperature() {
+      $("#temperature").text(thermostat.temperature);
+    }
+
+    function getEnergyUsage() {
+      $('#energy_usage').text(thermostat.energyUsage());
+      $("#energy_usage").attr("class",thermostat.energyUsage());
+      $("#temperature").attr("class",thermostat.energyUsage());
+    };
+
+    getTemperature();
+    getEnergyUsage();
 
     $("#up").on('click', function() {
       thermostat.up();
-      $("#temperature").text(thermostat.temperature);
-      $('#energy_usage').text(thermostat.energyUsage());
     });
 
     $("#down").on('click', function() {
       thermostat.down();
-      $("#temperature").text(thermostat.temperature);
-      $('#energy_usage').text(thermostat.energyUsage());
-    })
+    });
 
     $('#reset').on('click', function(){
-      thermostat.reset()
-      $("#temperature").text(thermostat.temperature);
-      $('#energy_usage').text(thermostat.energyUsage());
-    })
+      thermostat.resetTemp();
+    });
 
     $('#powersave').text(thermostat.powerSaveStatus());
 
     $('#powersaveswitch').on('click', function() {
       thermostat.powerSaveToggle();
       $('#powersave').text(thermostat.powerSaveStatus());
-    })
-
-    $('#energy_usage').text(thermostat.energyUsage());
-
     });
+
+    $(".tempchange").on('click', function() {
+      getTemperature();
+      getEnergyUsage();
+    });
+
+  });
 
   </script>
   </body>

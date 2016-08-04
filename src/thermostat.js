@@ -47,7 +47,7 @@ Thermostat.prototype.powerSaveToggle = function(){
   this._isPowerSave = !this._isPowerSave;
 };
 
-Thermostat.prototype.reset = function(){
+Thermostat.prototype.resetTemp = function(){
   this.temperature = this.DEFAULT_TEMPERATURE;
 };
 
