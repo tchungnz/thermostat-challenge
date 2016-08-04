@@ -4,17 +4,16 @@ function Thermostat() {
     this.POWER_SAVE_ON_MAX = 25;
     this.POWER_SAVE_OFF_MAX = 32;
     this.temperature = 20;
+    this.powerSaveOnError = "POWER SAVING MODE ON: Maximum temperature is " + this.POWER_SAVE_ON_MAX;
+    this.powerSaveOffError = "POWER SAVING MODE OFF: Maximum temperature is " + this.POWER_SAVE_OFF_MAX;
 }
-
-var powerSaveOnError = "POWER SAVING MODE ON: Maximum temperature is 25";
-var powerSaveOffError = "POWER SAVING MODE OFF: Maximum temperature is 32";
 
 Thermostat.prototype.up = function() {
   if (this.powerSaveOn()) {
-    throw new Error(powerSaveOnError);
+    throw new Error(this.powerSaveOnError);
   }
   else if (this.powerSaveOff()) {
-    throw new Error(powerSaveOffError);
+    throw new Error(this.powerSaveOffError);
   } else {
   this.temperature += 1;
 }
